@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Intersim – Officiële pagina</title>
+  <meta name="description" content="Intersim: multicenter simracing-competitie. Info, kalender, inschrijvingen, briefing, resultaten en livestream." />
+  <meta property="og:title" content="Intersim – Officiële pagina" />
+  <meta property="og:description" content="Multicenter simracing-competitie. Volgende race: Intersim 3H – Oreca 07 @ Le Mans (21 september 2025)." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#f97316" />
+  <style>
+    :root {
+      /* Dark theme base in zwart/grijs met oranje accent */
+      --bg: #111111;      /* zwart */
+      --bg-soft: #1a1a1a; /* donkergrijs */
+      --card: #1e1e1e;    /* kaart achtergrond */
+      --muted: #c7c7c7;   /* lichtgrijs tekst */
+      --fg: #ffffff;      /* wit tekst */
+      --accent: #f97316;  /* oranje */
+      --accent-2: #ffb74d;/* lichte oranje */
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --bad: #ef4444;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius-lg: 24px;
+      --maxw: 1100px;
+    }
+    * { box-sizing: border-box }
+    html, body { height: 100% }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, "Noto Sans", Arial, sans-serif;
+      line-height: 1.5;
+      color: var(--fg);
+      background: radial-gradient(1200px 600px at 20% -10%, #f9731622, transparent),
+                  radial-gradient(900px 400px at 90% 10%, #f9731644, transparent),
+                  var(--bg);
+    }
+    a { color: var(--accent); text-decoration: none }
+    a:hover { text-decoration: underline }
+    .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 20px }
+    .pill { display:inline-block; padding:.35rem .7rem; border:1px solid #ffffff29; border-radius:999px; font-size:.8rem; color: var(--muted) }
+
+    /* Header / Nav */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(8px);
+      background: linear-gradient(180deg, #111111cc, #11111100);
+      border-bottom: 1px solid #ffffff1a;
+    }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:12px; height:64px }
+    .brand { display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.3px }
+    .logo { width:32px; height:32px; border-radius:10px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display:grid; place-items:center; color:#111; font-weight:800 }
+    nav ul { list-style:none; margin:0; padding:0; display:flex; gap:14px }
+    nav a { color: var(--fg); opacity:.9; padding:8px 10px; border-radius:10px }
+    nav a:hover { background:#ffffff14; text-decoration:none }
+    .nav-cta { display:flex; gap:10px }
+    .btn { display:inline-flex; align-items:center; gap:8px; border:1px solid #ffffff22; background:#ffffff12; padding:10px 14px; border-radius:14px; font-weight:600 }
+    .btn:hover { background:#ffffff22; text-decoration:none }
+    .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color:#111; border: none }
+    .btn.primary:hover { filter: brightness(1.05) }
+    .mobile-toggle { display:none }
+
+    /* Hero */
+    .hero { padding: 54px 0 34px }
+    .hero-wrap { display:grid; grid-template-columns: 1.2fr .8fr; gap:24px; align-items:center }
+    .hero .title { font-size: clamp(28px, 4vw, 46px); line-height:1.1; margin: 6px 0 8px }
+    .subtitle { color: var(--muted); font-size: 1.05rem }
+    .hero-card { background: linear-gradient(180deg, #1e1e1e, #111); border:1px solid #ffffff1a; box-shadow: var(--shadow); border-radius: var(--radius-lg); padding: 18px }
+    .kv { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:14px; margin-top:14px }
+    .kv .item { background:#ffffff10; border:1px solid #ffffff18; border-radius:16px; padding:10px 12px }
+    .kv .k { font-size:.78rem; color:var(--muted) }
+    .kv .v { font-size:1.02rem; font-weight:700 }
+
+    /* Countdown */
+    .countdown { display:flex; gap:10px; margin-top: 14px; flex-wrap:wrap }
+    .cd { background:#ffffff14; border:1px solid #ffffff22; padding:10px 12px; border-radius:14px; min-width:82px; text-align:center }
+    .cd .num { font-weight:800; font-size:1.3rem }
+    .cd .lab { font-size:.72rem; color:var(--muted) }
+
+    /* Sections */
+    section { padding: 48px 0 }
+    h2 { font-size: clamp(22px, 3.2vw, 34px); margin: 0 0 16px }
+    .section-card { background: var(--card); border:1px solid #ffffff1a; border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow) }
+
+    /* Timeline */
+    .timeline { display:grid; gap:12px; margin-top:10px }
+    .tl-item { display:grid; grid-template-columns: 120px 1fr; gap:12px; align-items:flex-start }
+    .tl-item .when { color: var(--muted); font-size:.9rem }
+    .badge { display:inline-block; padding:.25rem .6rem; border-radius:999px; font-size:.75rem; border:1px solid #ffffff2a; background:#ffffff14; margin-left:8px }
+
+    /* Table */
+    table { width:100%; border-collapse: collapse; overflow:hidden; border-radius: 12px }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #ffffff14 }
+    th { text-align:left; color: var(--muted); font-weight:600; font-size:.9rem }
+    tbody tr:hover { background:#ffffff0c }
+
+    /* Grid cards */
+    .grid { display:grid; grid-template-columns: repeat(12, 1fr); gap:14px }
+    .col-4 { grid-column: span 4 }
+    .col-6 { grid-column: span 6 }
+    .col-12 { grid-column: span 12 }
+    .card { background: var(--card); border:1px solid #ffffff1a; border-radius: var(--radius); padding:16px; box-shadow: var(--shadow) }
+    .center-head { display:flex; align-items:center; gap:10px }
+    .logo-sm { width:38px; height:38px; border-radius:12px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display:grid; place-items:center; color:#111; font-weight:800 }
+
+    /* FAQ */
+    details { background: var(--card); border:1px solid #ffffff1a; border-radius: var(--radius); padding: 14px 16px }
+    details + details { margin-top: 10px }
+    summary { cursor:pointer; font-weight:600 }
+    summary::-webkit-details-marker { display:none }
+
+    /* Footer */
+    footer { border-top: 1px solid #ffffff1a; padding: 30px 0; color: var(--muted) }
+
+    /* Utils */
+    .muted { color: var(--muted) }
+    .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center }
+    .spacer { height: 18px }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-wrap { grid-template-columns: 1fr }
+      nav ul { display:none }
+      .mobile-toggle { display: inline-flex; border:1px solid #ffffff22; background:#ffffff10; padding:8px 10px; border-radius:10px }
+      .mobile-menu { display:none; padding: 8px 0 14px }
+      .mobile-menu a { display:block; padding:8px 0; border-bottom: 1px dashed #ffffff2a }
+      .col-4 { grid-column: span 12 }
+      .col-6 { grid-column: span 12 }
+    }
+
+    /* Print */
+    @media print {
+      header, .nav-cta, .mobile-toggle, .countdown, iframe, .btn { display:none !important }
+      body { background: white; color: black }
+      .section-card, .card { box-shadow:none; border:1px solid #ddd }
+    }
+  </style>
+</head>
+<body>
+  <a class="pill" href="#main" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">Naar content</a>
+  <header>
+    <div class="container nav">
+      <div class="brand"><div class="logo" aria-hidden="true">IS</div> Intersim</div>
+      <nav aria-label="Hoofdmenu">
+        <button class="mobile-toggle" id="mobileToggle" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+        <ul>
+          <li><a href="#over">Over</a></li>
+          <li><a href="#volgende">Volgende race</a></li>
+          <li><a href="#kalender">Kalender</a></li>
+          <li><a href="#reglement">Reglement</a></li>
+          <li><a href="#inschrijven">Inschrijven</a></li>
+          <li><a href="#resultaten">Resultaten</a></li>
+          <li><a href="#centers">Centers</a></li>
+          <li><a href="#livestream">Livestream</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn" href="#reglement" title="Lees briefing en reglementen">📄 Briefing</a>
+        <a class="btn primary" href="#inschrijven" title="Schrijf je in">🏁 Inschrijven</a>
+      </div>
+    </div>
+    <div class="container mobile-menu" id="mobileMenu" hidden>
+      <a href="#over">Over</a>
+      <a href="#volgende">Volgende race</a>
+      <a href="#kalender">Kalender</a>
+      <a href="#reglement">Reglement</a>
+      <a href="#inschrijven">Inschrijven</a>
+      <a href="#resultaten">Resultaten</a>
+      <a href="#centers">Centers</a>
+      <a href="#livestream">Livestream</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-wrap">
+        <div>
+          <span class="pill">Multicenter simracing-competitie</span>
+          <h1 class="title">Intersim 3H – Oreca 07 @ Le Mans</h1>
+          <p class="subtitle">De volgende editie wordt verreden op <strong>zondag 21 september 2025</strong>. Max. <strong>70 rijders</strong>. De briefing wordt live uitgezonden vanuit <strong>Worldkarts Kortrijk</strong> (tenzij overgenomen door een ander center).</p>
+
+          <div class="row" style="margin-top:8px">
+            <a class="btn primary" href="#inschrijven">Schrijf je in</a>
+            <a class="btn" href="#kalender">Bekijk kalender</a>
+            <button class="btn" id="addToCalendarBtn" type="button">➕ Voeg toe aan agenda</button>
+          </div>
+
+          <div class="countdown" aria-live="polite" id="countdown">
+            <div class="cd"><div class="num" id="cd-d">--</div><div class="lab">dagen</div></div>
+            <div class="cd"><div class="num" id="cd-h">--</div><div class="lab">uren</div></div>
+            <div class="cd"><div class="num" id="cd-m">--</div><div class="lab">min</div></div>
+            <div class="cd"><div class="num" id="cd-s">--</div><div class="lab">sec</div></div>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Race-informatie">
+          <div class="kv">
+            <div class="item"><div class="k">Circuit</div><div class="v">Le Mans 2025</div></div>
+            <div class="item"><div class="k">Auto</div><div class="v">Oreca 07 (LMP2)</div></div>
+            <div class="item"><div class="k">Datum</div><div class="v">21 sep 2025</div></div>
+            <div class="item"><div class="k">Prekwalificatie</div><div class="v">1–20 sep 2025</div></div>
+            <div class="item"><div class="k">Deelnemende centers</div><div class="v">Waregem • Kortrijk • Gent</div></div>
+            <div class="item"><div class="k">Capaciteit</div><div class="v">70 rijders</div></div>
+          </div>
+          <p class="muted" style="margin-top:10px">Tip: zorg dat je content up-to-date is via de lokale sim-pc (VM/TrueNAS sync).</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- OVER -->
+    <section id="over">
+      <div class="container">
+        <h2>Wat is Intersim?</h2>
+        <div class="section-card">
+          <p><strong>Intersim</strong> is een multicenter simracing-competitie. Rijders nemen gelijktijdig deel vanuit verschillende centers. We gebruiken een gecentraliseerde content-build (cloud VM & TrueNAS) en distribueren lokaal per center voor stabiele prestaties, ook bij tragere verbindingen.</p>
+          <p class="muted">Doel: professionele organisatie, duidelijke communicatie, eerlijke competitie. Geen Ferrari-content in the series i.v.m. licentie—alternatieven worden toegepast indien nodig.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VOLGENDE RACE / TIMELINE -->
+    <section id="volgende">
+      <div class="container">
+        <h2>Volgende race: 21 september 2025</h2>
+        <div class="section-card">
+          <div class="timeline">
+            <div class="tl-item"><div class="when">1–20 sep</div><div><strong>Prekwalificatie</strong> <span class="badge">remote hotlaps</span><br><span class="muted">Kwalificeer voor de main split – limieten en server-info in de briefing.</span></div></div>
+            <div class="tl-item"><div class="when">21 sep – 13:00</div><div><strong>Drivers' briefing</strong> <span class="badge">livestream</span></div></div>
+            <div class="tl-item"><div class="when">21 sep – 13:30</div><div><strong>Server open & warm-up</strong></div></div>
+            <div class="tl-item"><div class="when">21 sep – 14:00</div><div><strong>Race start</strong> <span class="badge">3 uur</span></div></div>
+            <div class="tl-item"><div class="when">~17:15</div><div><strong>Prijsuitreiking & interviews</strong></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KALENDER -->
+    <section id="kalender">
+      <div class="container">
+        <h2>Kalender</h2>
+        <div class="section-card">
+          <table aria-label="Kalender">
+            <thead>
+              <tr><th>Datum</th><th>Event</th><th>Circuit</th><th>Auto/klasse</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>21 sep 2025</td><td>Intersim 3H</td><td>Le Mans 2025</td><td>Oreca 07 (LMP2)</td><td><span class="badge">Open</span></td></tr>
+              <tr><td>Q4 2025</td><td>Intersim Sprint Cup</td><td>TBA</td><td>GT3</td><td><span class="badge">TBA</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGLEMENT -->
+    <section id="reglement">
+      <div class="container">
+        <h2>Reglement & Briefing</h2>
+        <div class="grid">
+          <div class="col-6 card">
+            <h3 style="margin-top:0">Briefing (PDF)</h3>
+            <p>Alle serverinstellingen, startprocedure, pitregels en communicatiekanalen.</p>
+            <a class="btn" href="#" download>📄 Download briefing.pdf</a>
+          </div>
+          <div class="col-6 card">
+            <h3 style="margin-top:0">Sportief & technisch reglement</h3>
+            <p>Algemene gedragscode, track limits, protestprocedure en technische vereisten.</p>
+            <a class="btn" href="#" download>📘 Download reglement.pdf</a>
+          </div>
+        </div>
+        <div class="spacer"></div>
+        <div class="section-card">
+          <strong>Samenvatting</strong>
+          <ul>
+            <li>Clean racing, blue flags respecteren, unsafe rejoins vermijden.</li>
+            <li>Track limits: 3x waarschuwingen → drive-through.</li>
+            <li>Incidenten melden via formulier (link in briefing).</li>
+          </ul>
+          <p class="muted">*Vervang hierboven de links door je eigen PDF's.*</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSCHRIJVEN -->
+    <section id="inschrijven">
+      <div class="container">
+        <h2>Inschrijven</h2>
+        <div class="section-card">
+          <p>Inschrijven gebeurt via het onderstaande formulier. Na inschrijving ontvang je per mail de bevestiging en praktische info.</p>
+          <div class="row">
+            <a class="btn primary" href="#" target="_blank" rel="noopener">Open inschrijfformulier</a>
+            <a class="btn" href="#faq">Lees eerst de FAQ</a>
+          </div>
+          <p class="muted" style="margin-top:10px">Tip: Gebruik een Google Form en plak hier de <code>iframe</code>-embed of link.</p>
+          <!-- Voorbeeld iframe (vervang src):
+          <iframe title="Inschrijfformulier" src="https://docs.google.com/forms/d/e/EXAMPLE/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0">Laden…</iframe>
+          -->
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTATEN -->
+    <section id="resultaten">
+      <div class="container">
+        <h2>Resultaten & Klassement</h2>
+        <div class="section-card">
+          <table aria-label="Resultaten">
+            <thead>
+              <tr><th>Pos</th><th>Rijder / Team</th><th>Center</th><th>Auto</th><th>Racetijd</th><th>Punten</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>—</td><td>—</td><td>Oreca 07</td><td>—</td><td>—</td></tr>
+              <tr><td>2</td><td>—</td><td>—</td><td>Oreca 07</td><td>—</td><td>—</td></tr>
+              <tr><td>3</td><td>—</td><td>—</td><td>Oreca 07</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+          <p class="muted" style="margin-top:10px">*Vul dit na de race of link naar een Google Sheet met live standings.*</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CENTERS -->
+    <section id="centers">
+      <div class="container">
+        <h2>Deelnemende centers</h2>
+        <div class="grid">
+          <div class="col-4 card">
+            <div class="center-head"><div class="logo-sm">W</div> <strong>Waregem</strong></div>
+            <p class="muted">TrueNAS content build & distributie. Lokale sync naar sim-pc's.</p>
+          </div>
+          <div class="col-4 card">
+            <div class="center-head"><div class="logo-sm">K</div> <strong>Kortrijk</strong></div>
+            <p class="muted">Worldkarts Kortrijk – standaard locatie voor live briefing & uitzending.</p>
+          </div>
+          <div class="col-4 card">
+            <div class="center-head"><div class="logo-sm">G</div> <strong>Gent</strong></div>
+            <p class="muted">Volledige deelname bevestigd. Lokale distributie via pc01.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVESTREAM -->
+    <section id="livestream">
+      <div class="container">
+        <h2>Livestream</h2>
+        <div class="section-card">
+          <p class="muted">De stream gaat live op <strong>21 sep 2025 – 13:30</strong>. Embed hieronder of link naar YouTube/Twitch.</p>
+          <div style="aspect-ratio:16/9; background:#141414; border:1px dashed #ffffff2a; border-radius:12px; display:grid; place-items:center">
+            <p class="muted">Plaats hier je YouTube/Twitch embed (<code>iframe</code>).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Hoe werkt de prekwalificatie?</summary>
+          <p>De prequal loopt van <strong>1 t/m 20 september 2025</strong>. Rijd hotlaps op de aangegeven server. De snelste tijden plaatsen zich voor de main split. Details in de briefing.</p>
+        </details>
+        <details>
+          <summary>Welke content heb ik nodig?</summary>
+          <p>Gebruik de lokale sync op de sim-pc (VM/TrueNAS). Controleer vlak voor het event op updates. Vermijd Ferrari-content i.v.m. licenties – alternatieven zijn voorzien.</p>
+        </details>
+        <details>
+          <summary>Kan ik als center aansluiten?</summary>
+          <p>Ja. Vereisten: stabiele uplink, één ‘master’ sim-pc voor lokale distributie, rclone/robocopy pipeline. Neem contact op via mail/Discord.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <h2>Contact</h2>
+        <div class="section-card">
+          <p>Vragen of samenwerken? Mail ons of sluit aan op Discord.</p>
+          <div class="row">
+            <a class="btn" href="mailto:info@intersim.example">✉️ info@intersim.example</a>
+            <a class="btn" href="#" target="_blank" rel="noopener">💬 Discord</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        © <span id="year"></span> Intersim. Alle rechten voorbehouden.
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // =====================
+    // CONFIG
+    // =====================
+    // Pas dit aan naar het juiste startmoment (Brussel-tijd):
+    // ISO 8601 met timezone offset. Voorbeeld: 2025-09-21T14:00:00+02:00
+    const EVENT_ISO = '2025-09-21T14:00:00+02:00';
+
+    // =====================
+    // MOBILE NAV TOGGLE
+    // =====================
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', () => {
+        const isOpen = mobileMenu.hasAttribute('hidden') ? false : true;
+        if (isOpen) {
+          mobileMenu.setAttribute('hidden', '');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+        } else {
+          mobileMenu.removeAttribute('hidden');
+          mobileToggle.setAttribute('aria-expanded', 'true');
+        }
+      });
+    }
+
+    // =====================
+    // SMOOTH SCROLL (native CSS is fine; this is for older browsers)
+    // =====================
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id.length > 1) {
+          const el = document.querySelector(id);
+          if (el) {
+            e.preventDefault();
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+    // =====================
+    // COUNTDOWN
+    // =====================
+    const dEl = document.getElementById('cd-d');
+    const hEl = document.getElementById('cd-h');
+    const mEl = document.getElementById('cd-m');
+    const sEl = document.getElementById('cd-s');
+    const cdWrap = document.getElementById('countdown');
+
+    function updateCountdown() {
+      const now = new Date();
+      const target = new Date(EVENT_ISO);
+      const diff = target - now;
+      if (diff <= 0) {
+        cdWrap.innerHTML = '<span class="badge" style="background:#22c55e22;border-color:#22c55e55">Event gestart of afgelopen</span>';
+        clearInterval(timer);
+        return;
+      }
+      const sec = Math.floor(diff / 1000);
+      const days = Math.floor(sec / 86400);
+      const hours = Math.floor((sec % 86400) / 3600);
+      const mins = Math.floor((sec % 3600) / 60);
+      const secs = sec % 60;
+      dEl.textContent = String(days);
+      hEl.textContent = String(hours).padStart(2, '0');
+      mEl.textContent = String(mins).padStart(2, '0');
+      sEl.textContent = String(secs).padStart(2, '0');
+    }
+    const timer = setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // =====================
+    // ADD TO CALENDAR (ICS download)
+    // =====================
+    function pad(n){ return String(n).padStart(2,'0'); }
+    function toICSDate(dt) { // UTC format YYYYMMDDTHHMMSSZ
+      const y = dt.getUTCFullYear();
+      const mo = pad(dt.getUTCMonth()+1);
+      const d = pad(dt.getUTCDate());
+      const h = pad(dt.getUTCHours());
+      const mi = pad(dt.getUTCMinutes());
+      const s = pad(dt.getUTCSeconds());
+      return `${y}${mo}${d}T${h}${mi}${s}Z`;
+    }
+    document.getElementById('addToCalendarBtn').addEventListener('click', () => {
+      const start = new Date(EVENT_ISO);
+      const end = new Date(start.getTime() + 3 * 60 * 60 * 1000); // 3 uur race
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Intersim//NL',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        `UID:${Date.now()}@intersim`,
+        `DTSTAMP:${toICSDate(new Date())}`,
+        `DTSTART:${toICSDate(start)}`,
+        `DTEND:${toICSDate(end)}`,
+        'SUMMARY:Intersim 3H – Oreca 07 @ Le Mans',
+        'DESCRIPTION:Multicenter simracing-competitie. Briefing live vanuit Kortrijk. Zie website voor details.',
+        'LOCATION:Waregem • Kortrijk • Gent',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'intersim-3h.ics';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    });
+
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // =====================
+    // Structured data (SEO)
+    // =====================
+    (function addJSONLD(){
+      const data = {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Intersim 3H – Oreca 07 @ Le Mans",
+        "startDate": EVENT_ISO,
+        "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "location": { "@type": "VirtualLocation", "url": window.location.href },
+        "organizer": { "@type": "Organization", "name": "Intersim" },
+        "description": "Multicenter simracing-competitie met centrale briefing en drie uur race."
+      };
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(data);
+      document.head.appendChild(script);
+    })();
+  </script>
+</body>
+</html>
